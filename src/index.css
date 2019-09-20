@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+header{
+  background: grey;
+  height: 150px;
+}
+
+.Link{
+  text-decoration: none;
+  color: purple;
+  font-size: 25px;
+}
+.LinkActive{
+  text-decoration: none;
+  color: white;
+  font-size: 40px;
+}
