@@ -27,3 +27,8 @@ header{
   color: white;
   font-size: 40px;
 }
+
+.chat{
+  display: flex;
+  flex-direction: column-reverse;
+}

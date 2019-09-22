@@ -1,46 +1,79 @@
 import React from 'react';
-import {jsonPost} from '../../actions/server'
-import {connect} from 'react-redux'
+import { addSomethingToServer, GetSomethingFromServer } from '../../actions/server'
+import {SendOflineMessages} from '../../actions/Secondaction'
+import { connect } from 'react-redux'
 
-class MainPage extends React.Component{
-    state = {
-        name: "",
-        message : ""
-    }
-
-    changeName(text){
-        this.setState((prevState)=>({
+const initialState = {
+    name: "",
+    message: "",
+    toStoreMes: ""
+}
+class MainPage extends React.Component {
+    state = initialState
+    changeName(text) {
+        this.setState((prevState) => ({
             ...prevState,
-            name:text
+            name: text
 
         }))
         console.log(this.state)
     }
-    changeMessage(text){
-        this.setState((prevState)=>({
+    changeMessage(text) {
+        this.setState((prevState) => ({
             ...prevState,
-            message:text
+            message: text
 
         }))
         console.log(this.state)
     }
-    addMessage(){
-        this.props.jsonPost({
-            func: 'addMessage', 
-            nick: this.state.nick, 
-            message: this.state.message})
+    addMessage() {
+        this.props.addSomethingToServer({
+            func: 'addMessage',
+            nick: this.state.name,
+            message: this.state.message
+
+        })
+        this.setState(() => initialState)
+    }
+    componentDidMount() {
+        this.props.GetSomethingFromServer({
+            func: "getMessages",
+        })
     }
 
-    render(){
-        return(
+    addMessageToStore(val) {
+            this.setState(prevState => ({
+                ...prevState, 
+                toStoreMes: val 
+            }))
+    }
+
+    sendMessageToStore() {
+            this.props.SendOflineMessages(this.state.toStoreMes)
+    }
+
+    render() {
+        const { messages } = this.props
+        return (
             <main>
-                <input onChange={(e)=> this.changeName(e.target.value)} value={this.state.name}></input>
-                <input onChange={(e)=>this.changeMessage(e.target.value)} value={this.state.message}></input>
-                <button onClick={()=>this.addMessage()}>CLICK HERE</button>
+                <h2>Add to store</h2>
+                <input onChange={(e) => this.addMessageToStore(e.target.value)} value={this.state.toStoreMes}></input>
+                <button onClick={() => this.sendMessageToStore()}>ADD TO STORE</button>
+                <h2>Add to server</h2>
+                <input onChange={(e) => this.changeName(e.target.value)} value={this.state.name} placeholder="name"></input>
+                <input onChange={(e) => this.changeMessage(e.target.value)} value={this.state.message} placeholder="message"></input>
+                <button onClick={() => this.addMessage()}>ADD TO SERVER</button>
+                <div className="chat">
+                    {messages.map((msg, index) => <p key={index}>{msg.nick === "" ? "undefined" : msg.nick} : {msg.message === "" ? "undefined" : msg.message}</p>)}
+                </div>
             </main>
         )
     }
 }
 
-
-export default connect(null, {jsonPost})(MainPage)
+const mapStateToProps = state => {
+    return {
+        messages: state.first.allMessages
+    }
+}
+export default connect(mapStateToProps, { addSomethingToServer, GetSomethingFromServer,SendOflineMessages })(MainPage)

@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom'
 
 import Layout from "./components/Layout"
 import MainPage from './containers/MainPage'
-import Header from './components/Header'
 import SecondPage from './containers/SecondPage'
 
 class Router extends React.Component {
@@ -14,7 +13,7 @@ class Router extends React.Component {
                     <Route exact path='/'
                         render={() => <MainPage />}
                     />
-                     <Route path='/SecondPage'
+                    <Route path='/SecondPage'
                         render={() => <SecondPage />}
                     />
                 </Switch>
