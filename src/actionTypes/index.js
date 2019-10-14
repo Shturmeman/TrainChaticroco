@@ -9,3 +9,23 @@ export const GET_MESSAGES_REJECT = "GET_MESSAGES_REJECT"
 
 
 export const SEND_OFFLINE_MESSAGES = "SEND_OFFLINE_MESSAGES"
+
+export const GET_NEWS = "GET_NEWS"
+export const GET_NEWS_SUCCESS = "GET_NEWS_SUCCESS"
+export const GET_NEWS_REJECT = "GET_NEWS_REJECT"
+
+
+export const GET_USER = "GET_USER"
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS"
+export const GET_USER_REJECT = 'GET_USER_REJECT'
+
+
+export const LOG_IN = "LOG_IN"
+export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS"
+export const LOG_IN_REJECT = "LOG_IN_REJECT"
+export const LOG_OUT = "LOG_OUT"
+
+
+export const REGISTER = "REGISTER"
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
+export const REGISTER_REJECT = "REGISTER_REJECT"
