@@ -11,11 +11,8 @@ export default (state = initialState, action) => {
             return state
         }
         case types.ADD_TO_SERVER_SUCCESS: {
-            const { data } = action.payload.data;
-
             return {
                 ...state,
-                allMessages: data
             }
         }
         case types.ADD_TO_SERVER_REJECT: {
@@ -26,6 +23,7 @@ export default (state = initialState, action) => {
         }
         case types.GET_MESSAGES_SUCCESS: {
             const { data } = action.payload.data;
+            console.log(data, "GET_MESSAGES_SUCCESS")
             return {
                 ...state,
                 allMessages: data

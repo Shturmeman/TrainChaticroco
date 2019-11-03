@@ -3,13 +3,6 @@ import { connect } from 'react-redux'
 import { logIn } from '../../actions/Login2'
 import { getLogautUser } from '../../actions/Logout'
 
-const initialState = {
-    login: "",
-    password: ""
-}
-
-
-
 class LoginForm extends React.Component {
     state = { login: "", password: "" }
 

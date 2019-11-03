@@ -15,7 +15,7 @@ export default (state = initialState, {type,payload}) => {
             }
         }
         case types.GET_USER_SUCCESS: {
-            console.log(payload)
+            // console.log(payload)
             return {
                 ...state ,
                 isFetching : false,

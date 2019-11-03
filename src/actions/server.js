@@ -23,19 +23,27 @@ const postRequestReject = () => {
     }
 }
 export const addSomethingToServer = payload => async dispatch => {
+    dispatch(postRequest())
     try {
-        dispatch(postRequest())
+        console.log(payload, "asdasdsad")
         const data = await axios({
             method: "POST",
             url: baseUrl,
-            data: JSON.stringify(payload) 
+            data: JSON.stringify(payload)
+
         })
+        console.log(data)
+        // console.log(payload)
+
         dispatch(postRequestSuccess(data))
+        dispatch(GetSomethingFromServer({
+            func: "getMessages"
+        }))
     }
-    catch(error) {
+    catch (error) {
         dispatch(postRequestReject(error))
     }
-    
+
 }
 
 const GetAllMessages = payload => {
@@ -53,23 +61,24 @@ const GetAllMessagesSuccess = payload => {
 const GetAllMessagesReject = () => {
     return {
         type: types.GET_MESSAGES_REJECT,
-
     }
 }
 
 
-export const GetSomethingFromServer = payload => async dispatch =>{
+export const GetSomethingFromServer = payload => async dispatch => {
     dispatch(GetAllMessages())
     try {
         const data = await axios({
             method: "POST",
             url: baseUrl,
-            data: JSON.stringify(payload) 
+            data: JSON.stringify(payload)
+
         })
+        console.log(data, "ASDSADSAD")
         dispatch(GetAllMessagesSuccess(data))
     }
-    catch(error) {
+    catch (error) {
         dispatch(GetAllMessagesReject(error))
     }
-    
+
 }

@@ -12,7 +12,7 @@ export default (state = initialState, { type, payload }) => {
             return { ...state, isFetching: true }
         }
         case types.GET_NEWS_SUCCESS: {
-            console.log(payload)
+            // console.log(payload)
             return { ...state, isFetching: false, newsList: payload.data.articles }
         }
         case types.GET_NEWS_REJECT: {

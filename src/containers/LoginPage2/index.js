@@ -17,7 +17,7 @@ class LoginPage2 extends React.Component {
                 newUser: !this.state.newUser
             }
         })
-        console.log(this.state.newUser)
+        
     }
 
 

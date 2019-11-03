@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
 
 
     render() {
-        const { getUserFromServer, user, isFetching } = this.props
+        const { getUserFromServer, isFetching } = this.props
         return (
             <>
                 {isFetching ?

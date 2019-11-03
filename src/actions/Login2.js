@@ -1,5 +1,5 @@
 import * as types from '../actionTypes'
-import { GraphQLClient } from 'graphql-request'
+// import { GraphQLClient } from 'graphql-request'
 import { checkToken, gql } from '../Utility'
 
 const logInRequest = () => {
@@ -27,7 +27,7 @@ const logInReject = (e) => {
 
 
 export const logIn = (payload) => {
-    console.log(payload)
+
     return async dispatch => {
         dispatch(logInRequest())
         checkToken()
@@ -69,7 +69,7 @@ const registerReject = (e) => {
 
 
 export const Register = (payload) => {
-    console.log("regarega", payload)
+
     return async dispatch => {
         dispatch(registerRequest())
         checkToken()
@@ -78,9 +78,9 @@ export const Register = (payload) => {
                 createUser(login:$login,password:$password){
                     _id
                 }}`, { login: payload.login, password: payload.password })
-            console.log("regaRes", res)
+
             if (!!res.createUser) {
-                console.log("success")
+
                 dispatch(registerSuccess(res))
                 dispatch(logIn(payload))
             }

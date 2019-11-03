@@ -7,7 +7,7 @@ const initialState = {
     name: "",
     message: "",
     toStoreMes: "",
-    counter: -25
+    counter: -10
 }
 class MainPage extends React.Component {
     state = initialState
@@ -17,7 +17,7 @@ class MainPage extends React.Component {
             name: text
 
         }))
-        console.log(this.state)
+
     }
     changeMessage(text) {
         this.setState((prevState) => ({
@@ -25,11 +25,11 @@ class MainPage extends React.Component {
             message: text
 
         }))
-        console.log(this.state)
+
     }
     addMessage() {
         this.props.addSomethingToServer({
-            func: 'addMessage',
+            func: "addMessage",
             nick: this.state.name,
             message: this.state.message
         })
@@ -38,45 +38,55 @@ class MainPage extends React.Component {
             name: "",
             message: "",
             toStoreMes: "",
-            counter: prevState.counter -1
+            counter: prevState.counter - 1
         }))
-}
-componentDidMount() {
-    this.props.GetSomethingFromServer({
-        func: "getMessages",
+        // this.props.GetSomethingFromServer({
+        //     func: "getMessages"
+        // })
+    }
+    componentDidMount() {
+        
+        this.props.GetSomethingFromServer({
+            func: "getMessages",
 
-    })
-}
+        })
+    }
+    // componentWillUnmount(){
+    //         clearInterval()
+        
+    // }
 
-addMessageToStore(val) {
-    this.setState(prevState => ({
-        ...prevState,
-        toStoreMes: val
-    }))
-}
 
-sendMessageToStore() {
-    this.props.SendOflineMessages(this.state.toStoreMes)
-}
+    addMessageToStore(val) {
+        this.setState(prevState => ({
+            ...prevState,
+            toStoreMes: val
+        }))
+    }
 
-render() {
-    const { messages } = this.props
-    const {counter} = this.state
-    return (
-        <main>
-            <h2>Add to store</h2>
-            <input onChange={(e) => this.addMessageToStore(e.target.value)} value={this.state.toStoreMes}></input>
-            <button onClick={() => this.sendMessageToStore()}>ADD TO STORE</button>
-            <h2>Add to server</h2>
-            <input onChange={(e) => this.changeName(e.target.value)} value={this.state.name} placeholder="name"></input>
-            <input onChange={(e) => this.changeMessage(e.target.value)} value={this.state.message} placeholder="message"></input>
-            <button onClick={() => this.addMessage()}>ADD TO SERVER</button>
-            <div className="chat">
-                {messages.slice(counter).map((msg, index) => <p key={index}>{msg.nick === "" ? "undefined" : msg.nick} : {msg.message === "" ? "undefined" : msg.message}</p>)}
-            </div>
-        </main>
-    )
-}
+    sendMessageToStore() {
+        this.props.SendOflineMessages(this.state.toStoreMes)
+    }
+
+    render() {
+        let { messages } = this.props
+        // console.log(this.props)
+        const { counter } = this.state
+        return (
+            <main>
+                <h2>Add to store</h2>
+                <input onChange={(e) => this.addMessageToStore(e.target.value)} value={this.state.toStoreMes}></input>
+                <button onClick={() => this.sendMessageToStore()}>ADD TO STORE</button>
+                <h2>Add to server</h2>
+                <input onChange={(e) => this.changeName(e.target.value)} value={this.state.name} placeholder="name"></input>
+                <input onChange={(e) => this.changeMessage(e.target.value)} value={this.state.message} placeholder="message"></input>
+                <button onClick={() => this.addMessage()}>ADD TO SERVER</button>
+                <div className="chat">
+                    {messages.slice(counter).map((msg, index) => <p key={index}>{msg.nick === "" ? "undefined" : msg.nick} : {msg.message === "" ? "undefined" : msg.message} </p>)}
+                </div>
+            </main>
+        )
+    }
 }
 
 const mapStateToProps = state => {

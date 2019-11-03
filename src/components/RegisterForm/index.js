@@ -3,11 +3,7 @@ import { connect } from 'react-redux'
 import { Register } from '../../actions/Login2'
 
 
-const initialState = {
-    login: "",
-    password: "",
-    password2: ""
-}
+
 
 
 
